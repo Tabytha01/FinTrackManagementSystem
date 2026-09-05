@@ -165,7 +165,19 @@ body {
 }
 .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
 
-.stat-icon { font-size: 1.8rem; }
+.stat-icon-box {
+    width: 44px;
+    height: 44px;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: .85rem;
+    flex-shrink: 0;
+}
 .stat-label { font-weight: 700; font-size: .95rem; color: var(--text); }
 .stat-sub { font-size: .82rem; color: var(--text-muted); margin-top: 2px; }
 
@@ -200,7 +212,19 @@ body {
 }
 .feature-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
 
-.feature-icon { font-size: 2rem; margin-bottom: 16px; }
+.feature-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: .85rem;
+    margin-bottom: 16px;
+}
 .feature-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: var(--text); }
 .feature-card p { font-size: .9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6; }
 
