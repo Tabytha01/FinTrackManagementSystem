@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Transactions — FinTrack</title>
+    <h:outputStylesheet library="css" name="styles.css" />
+</h:head>
+<h:body>
+
+    <nav class="navbar">
+        <div class="nav-brand">💰 FinTrack</div>
+        <div class="nav-links">
+            <h:form styleClass="nav-form">
+                <h:commandLink value="Home" action="index" styleClass="nav-link" />
+                <h:commandLink value="Budgets" action="budgetList" styleClass="nav-link" />
+                <h:commandLink value="+ Add Transaction" action="transactionForm" styleClass="nav-link nav-cta" />
+            </h:form>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h2>Transactions</h2>
+        <h:form>
+            <h:commandButton value="+ Add New" action="#{transactionBean.cancelEdit}" immediate="true" styleClass="home-btn" />
+        </h:form>
+    </div>
+
+    <div class="table-wrapper">
+        <h:form>
+            <h:dataTable value="#{transactionBean.transactions}" var="t" styleClass="product-table">
+                <h:column>
+                    <f:facet name="header">Description</f:facet>
+                    #{t.description}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Amount</f:facet>
+                    #{t.amount}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Date</f:facet>
+                    <h:outputText value="#{t.date}">
+                        <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Category</f:facet>
+                    #{t.category}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Actions</f:facet>
+                    <h:commandLink value="Edit" action="#{transactionBean.editTransaction(t)}" />
+                    &#160;|&#160;
+                    <h:commandLink value="Delete" action="#{transactionBean.deleteTransaction(t)}"
+                                   onclick="return confirm('Delete this transaction?');" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </div>
+
+</h:body>
+</html>

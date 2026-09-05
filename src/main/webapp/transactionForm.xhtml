@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Transaction Form — FinTrack</title>
+    <h:outputStylesheet library="css" name="styles.css" />
+</h:head>
+<h:body>
+
+    <nav class="navbar">
+        <div class="nav-brand">💰 FinTrack</div>
+        <div class="nav-links">
+            <h:form styleClass="nav-form">
+                <h:commandLink value="Home" action="index" styleClass="nav-link" />
+                <h:commandLink value="Transactions" action="transactionList" styleClass="nav-link" />
+                <h:commandLink value="Budgets" action="budgetList" styleClass="nav-link" />
+            </h:form>
+        </div>
+    </nav>
+
+    <div class="form-wrapper">
+        <div class="form-card">
+            <h2>
+                <h:outputText value="Edit Transaction" rendered="#{transactionBean.editMode}" />
+                <h:outputText value="Add Transaction" rendered="#{!transactionBean.editMode}" />
+            </h2>
+
+            <h:form>
+                <div class="form-group">
+                    <label>Description</label>
+                    <h:inputText value="#{transactionBean.description}" required="true"
+                                 requiredMessage="Description is required">
+                        <f:validateLength minimum="2" maximum="100" />
+                    </h:inputText>
+                </div>
+                <div class="form-group">
+                    <label>Amount</label>
+                    <h:inputText value="#{transactionBean.amount}" required="true"
+                                 requiredMessage="Amount is required">
+                        <f:validateDoubleRange minimum="0.01" />
+                    </h:inputText>
+                </div>
+                <div class="form-group">
+                    <label>Date (yyyy-MM-dd)</label>
+                    <h:inputText value="#{transactionBean.date}" required="true"
+                                 requiredMessage="Date is required">
+                        <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
+                    </h:inputText>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <h:inputText value="#{transactionBean.category}" required="true"
+                                 requiredMessage="Category is required" />
+                </div>
+
+                <div style="margin-top:28px; display:flex; gap:10px; flex-wrap:wrap;">
+                    <h:commandButton value="Save Transaction" action="#{transactionBean.saveTransaction}"
+                                     styleClass="home-btn" style="background:#10b981;" />
+                    <h:commandButton value="Cancel" action="#{transactionBean.cancelEdit}" immediate="true" styleClass="home-btn"
+                                     style="background:#6b7280;" />
+                    <h:commandLink value="← Back to Home" action="index" immediate="true" styleClass="home-btn"
+                                   style="background:transparent; color:#4f46e5; border:2px solid #4f46e5;" />
+                </div>
+
+                <h:messages styleClass="messages" />
+            </h:form>
+        </div>
+    </div>
+
+</h:body>
+</html>

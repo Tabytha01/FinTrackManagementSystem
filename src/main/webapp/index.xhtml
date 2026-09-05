@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <title>FinTrack — Financial Management System</title>
+    <h:outputStylesheet library="css" name="styles.css" />
+</h:head>
+<h:body>
+
+    <nav class="navbar">
+        <div class="nav-brand">💰 FinTrack</div>
+        <div class="nav-links">
+            <h:form styleClass="nav-form">
+                <h:commandLink value="Transactions" action="transactionList" styleClass="nav-link" />
+                <h:commandLink value="Budgets" action="budgetList" styleClass="nav-link" />
+                <h:commandLink value="+ Add Transaction" action="transactionForm" styleClass="nav-link nav-cta" />
+            </h:form>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">Financial Management System</span>
+            <h1 class="hero-title">Take Control of Your <span class="highlight">Finances</span></h1>
+            <p class="hero-desc">
+                FinTrack helps you track every transaction, manage your budgets, and gain
+                clear visibility into your spending — all in one place.
+            </p>
+            <div class="hero-actions">
+                <h:form styleClass="inline-form">
+                    <h:commandLink value="Get Started →" action="transactionForm" styleClass="btn btn-primary" />
+                    <h:commandLink value="View Transactions" action="transactionList" styleClass="btn btn-outline" />
+                </h:form>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="stat-card">
+                <span class="stat-icon">📊</span>
+                <div>
+                    <div class="stat-label">Track Expenses</div>
+                    <div class="stat-sub">Log every transaction instantly</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">🎯</span>
+                <div>
+                    <div class="stat-label">Set Budgets</div>
+                    <div class="stat-sub">Define limits per category</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">📈</span>
+                <div>
+                    <div class="stat-label">Monitor Trends</div>
+                    <div class="stat-sub">Stay on top of your finances</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2 class="section-title">Everything you need to manage money</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">💳</div>
+                <h3>Transaction Tracking</h3>
+                <p>Record income and expenses with descriptions, amounts, dates, and categories.</p>
+                <h:form styleClass="inline-form">
+                    <h:commandLink value="View Transactions →" action="transactionList" styleClass="feature-link" />
+                </h:form>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📋</div>
+                <h3>Budget Management</h3>
+                <p>Set monthly spending limits per category and keep your finances on track.</p>
+                <h:form styleClass="inline-form">
+                    <h:commandLink value="View Budgets →" action="budgetList" styleClass="feature-link" />
+                </h:form>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">➕</div>
+                <h3>Quick Entry</h3>
+                <p>Add new transactions and budgets in seconds with a clean, simple form.</p>
+                <h:form styleClass="inline-form">
+                    <h:commandLink value="Add Transaction →" action="transactionForm" styleClass="feature-link" />
+                </h:form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2025 FinTrack Management System. Built to simplify your financial life.</p>
+    </footer>
+
+</h:body>
+</html>

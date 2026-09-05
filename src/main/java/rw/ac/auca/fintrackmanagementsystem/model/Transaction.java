@@ -1,11 +1,8 @@
 package rw.ac.auca.fintrackmanagementsystem.model;
 
-import javax.annotation.Generated;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-
-import static com.sun.beans.introspect.PropertyInfo.Name.description;
 
 @Entity
 @Table(name = "transactions")
@@ -27,10 +24,10 @@ public class Transaction implements Serializable {
     @Column(nullable = false)
     private String category;
 
-    private Long getId() { return id;}
+    public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public String getDescription(){ return description;}
+    public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
     public Double getAmount() { return amount; }
@@ -40,6 +37,5 @@ public class Transaction implements Serializable {
     public void setDate(LocalDate date) { this.date = date; }
 
     public String getCategory() { return category; }
-    public void setCategory(String category) {this.category = category;}
+    public void setCategory(String category) { this.category = category; }
 }
-
