@@ -1,9 +1,12 @@
 package rw.ac.auca.fintrackmanagementsystem.service;
 
+import rw.ac.auca.fintrackmanagementsystem.config.RabbitMQConfig;
+import rw.ac.auca.fintrackmanagementsystem.messaging.BudgetExceededEvent;
 import rw.ac.auca.fintrackmanagementsystem.model.Budget;
 import rw.ac.auca.fintrackmanagementsystem.model.Transaction;
 import rw.ac.auca.fintrackmanagementsystem.repository.BudgetRepository;
 import rw.ac.auca.fintrackmanagementsystem.repository.TransactionRepository;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,9 @@ public class TransactionService {
 
     @Autowired
     private BudgetRepository budgetRepository;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     public List<Transaction> getAll() {
         return transactionRepository.findAll();
@@ -73,10 +79,16 @@ public class TransactionService {
 
         if (totalSpent > budget.getLimitAmount()) {
             double over = totalSpent - budget.getLimitAmount();
-            return String.format(
+            String warning = String.format(
                     "You've allocated %.2f for %s this month, you've now spent %.2f — %.2f over budget.",
                     budget.getLimitAmount(), transaction.getCategory().getName(), totalSpent, over
             );
+            rabbitTemplate.convertAndSend(
+                    RabbitMQConfig.EXCHANGE,
+                    RabbitMQConfig.ROUTING_KEY,
+                    new BudgetExceededEvent(transaction.getCategory().getId(), transaction.getCategory().getName(), warning, over)
+            );
+            return warning;
         }
         return null; // within budget
     }
