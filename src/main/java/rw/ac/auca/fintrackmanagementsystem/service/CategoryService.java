@@ -13,6 +13,10 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
     public List<Category> getAll() {
+        return categoryRepository.findByParentIsNull();
+    }
+
+    public List<Category> getAllFlat() {
         return categoryRepository.findAll();
     }
 
@@ -22,6 +26,11 @@ public class CategoryService {
     }
 
     public Category create(Category category) {
+        if (category.getParent() != null && category.getParent().getId() != null) {
+            Category parent = getById(category.getParent().getId());
+            category.setParent(parent);
+            category.setType(parent.getType());
+        }
         return categoryRepository.save(category);
     }
 
